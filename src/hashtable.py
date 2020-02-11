@@ -70,7 +70,7 @@ class HashTable:
                     node.next = pair
                     break
                 node = node.next
-            print("===Pair=== ", pair.key, pair.value)
+            # print("===Pair=== ", pair.key, pair.value)
         else:
             self.storage[index] = pair
             return self.storage[index].value
@@ -126,9 +126,18 @@ class HashTable:
         '''
         old_storage = self.storage
         self.capacity *= 2
-        self.storage = [None] * self.capacity
-        for item in old_storage:
-            self.insert(item.key, item.value)
+        new_storage = [None] * self.capacity
+        self.storage = new_storage
+
+        for i in range(len(old_storage)):
+            if old_storage[i]:
+                current_node = old_storage[i]
+
+                while current_node:
+                    self.insert(current_node.key, current_node.value)
+                    current_node = current_node.next
+
+        self.storage = new_storage
 
 
 
