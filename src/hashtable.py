@@ -89,13 +89,10 @@ class HashTable:
         if self.storage[index] is not None:
             if self.storage[index].key == key:
                 self.storage[index] = None
-            else:
-                print(f"WARNING:  Collision has occured at {index}")
         else:
             print(f"Warning key ({key}) not found.")
+            return None
         return
-
-
 
     def retrieve(self, key):
         '''
@@ -106,14 +103,16 @@ class HashTable:
         Fill this in.
         '''
         index = self._hash_mod(key)
-        if self.storage[index] is not None:
-            if self.storage[index].key == key:
-                return self.storage[index].value
-            else:
-                self.storage[index] = self.storage[index].next
-        else:
+
+        if self.storage[index] == None:
             return None
-        return
+        else:
+            node = self.storage[index]
+            while node is not None:
+                if node.key == key:
+                    return node.value
+                else:
+                    node = node.next
   
 
 
@@ -170,6 +169,7 @@ if __name__ == "__main__":
     ht.insert("key-9", "val-9")
 
     ht.resize()
+
 
     print(f"Resize: {len(ht.storage)}")
 
