@@ -12,7 +12,7 @@ class HashTable:
     A hash table that with `capacity` buckets
     that accepts string keys
     '''
-    def __init__(self, capacity, count = 0):
+    def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
         self.storage = [None] * capacity
 
@@ -52,12 +52,25 @@ class HashTable:
         Fill this in.
         '''
         index = self._hash_mod(key)
+        pair = LinkedPair(key, value)
         if self.storage[index] is not None:
-            print(f"WARNING:  Collision has occured at {index}")
+            node = self.storage[index]
+            while node != None:
+                if node.key == key:
+                    node.value = value
+                    break
+                elif node.next == None:
+                    node.next = pair
+                    break
+                node = node.next
+            print("===Pair=== ", pair.key, pair.value)
         else:
-            self.storage[index] = (key, value)
+            self.storage[index] = pair
+            return self.storage[index].value
 
         return
+
+
 
 
 
