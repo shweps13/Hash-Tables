@@ -51,6 +51,13 @@ class HashTable:
 
         Fill this in.
         '''
+        # => check if the storage is not empty
+        #       => if there is something -> loop thru node and check if key exist
+        #               => if key already exist -> replace valuse
+        #               => if not exist -> add LinkedPair
+        #       => if there nothing -> add LinkedPair
+
+
         index = self._hash_mod(key)
         pair = LinkedPair(key, value)
         if self.storage[index] is not None:
