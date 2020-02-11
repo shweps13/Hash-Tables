@@ -128,7 +128,7 @@ class HashTable:
         self.capacity *= 2
         self.storage = [None] * self.capacity
         for item in old_storage:
-            self.insert(item[0], item[1])
+            self.insert(item.key, item.value)
 
 
 
@@ -161,15 +161,15 @@ if __name__ == "__main__":
     print(ht.retrieve("line_3"))
 
     # # Test resizing
-    # old_capacity = len(ht.storage)
-    # ht.resize()
-    # new_capacity = len(ht.storage)
+    old_capacity = len(ht.storage)
+    ht.resize()
+    new_capacity = len(ht.storage)
 
-    # print(f"\nResized from {old_capacity} to {new_capacity}.\n")
+    print(f"\nResized from {old_capacity} to {new_capacity}.\n")
 
-    # # Test if data intact after resizing
-    # print(ht.retrieve("line_1"))
-    # print(ht.retrieve("line_2"))
-    # print(ht.retrieve("line_3"))
+    # Test if data intact after resizing
+    print(ht.retrieve("line_1"))
+    print(ht.retrieve("line_2"))
+    print(ht.retrieve("line_3"))
 
     # print("")
